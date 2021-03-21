@@ -22,4 +22,4 @@ jobs:
         uses: ./
         with:
           environment: dev
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.actioACTION_TOKEN }}
