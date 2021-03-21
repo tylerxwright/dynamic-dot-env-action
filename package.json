@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "test": "mocha",
-    "package": "ncc build --license LICENSE"
+    "package": "ncc build --license LICENSE",
+    "publish": "npm run build && npm run package"
   },
   "repository": {
     "type": "git",
