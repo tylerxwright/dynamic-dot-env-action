@@ -13,4 +13,4 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 #COPY package.json dist/index.js ./
 RUN npm install
-ENTRYPOINT [ "node", "index.js" ]
+ENTRYPOINT [ "node", "dist/index.js" ]
