@@ -2,11 +2,11 @@ name: 'Dynamic Dot Env Action'
 description: 'Build a .env file from Github secrets and from a file.'
 author: 'Tyler Wright'
 inputs:
-  env: 
+  environment: 
     required: false
     description: 'This is the name of the environment you store your secrets'
     default: ''
-  pat:
+  github_token:
     required: false
     description: 'A Personal Access Token with permissions to your repository secrets'
 runs:

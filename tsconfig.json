@@ -8,7 +8,6 @@
       ],
       "outDir": "./lib",
       "rootDir": "./src",
-      "sourceMap": true,
       "strict": true,
       "noImplicitAny": false,
       "esModuleInterop": true
