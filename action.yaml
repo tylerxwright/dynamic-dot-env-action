@@ -1,0 +1,14 @@
+name: 'Dynamic Dot Env Action'
+description: 'Build a .env file from Github secrets and from a file.'
+author: 'Tyler Wright'
+inputs:
+  environment: 
+    required: true
+    description: 'This is the name of the environment you store your secrets'
+    default: ''
+  pat:
+    required: true
+    description: 'A Personal Access Token with permissions to your repository secrets'
+runs:
+  using: 'node14'
+  main: 'dist/index.js'
