@@ -1,5 +1,7 @@
 FROM node:buster
 
+COPY . /app
+
 WORKDIR /gh
 RUN apt-get update && apt-get install -y \ 
     software-properties-common \
@@ -9,6 +11,6 @@ RUN apt-get update && apt-get install -y \
     && apt install gh
 
 WORKDIR /app
-COPY package.json dist/index.js ./
+#COPY package.json dist/index.js ./
 RUN npm install
 ENTRYPOINT [ "node", "index.js" ]
