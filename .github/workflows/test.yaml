@@ -20,4 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Testing action
       - uses: tylerxwright/dynamic-dot-env-action@v1.0.0-alpha
+
+
