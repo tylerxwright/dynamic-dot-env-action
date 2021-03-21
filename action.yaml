@@ -10,5 +10,5 @@ inputs:
     required: false
     description: 'A Personal Access Token with permissions to your repository secrets'
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: 'docker'
+  image: 'Dockerfile'
