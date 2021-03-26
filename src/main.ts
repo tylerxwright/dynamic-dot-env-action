@@ -12,8 +12,8 @@ async function run(): Promise<void> {
         const octokit = github.getOctokit(token);
 
         const repo = await octokit.repos.get({
-           owner: 'tylerxwright',
-           repo: 'dynamic-dot-env-action'
+            owner: 'tylerxwright',
+            repo: 'dynamic-dot-env-action'
         });
 
         const envSecrets = await octokit.actions.listEnvironmentSecrets({
@@ -21,6 +21,7 @@ async function run(): Promise<void> {
             environment_name: environment
         });
 
+        core.info("Logging secret names");
         for(const secret of envSecrets.data.secrets) {
             core.info(secret.name);
         }
