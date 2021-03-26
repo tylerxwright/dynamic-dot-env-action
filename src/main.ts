@@ -1,9 +1,14 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
+import * as dotenv from "dotenv";
 
 async function run(): Promise<void> {
+    dotenv.config();
+
     try {
-        const token = core.getInput('github_token');
+        const environment: string = process.env.GITHUB_ENVIRONMENT || core.getInput('environment');
+        const token: string = process.env.GITHUB_TOKEN || core.getInput('token');
+
         const octokit = github.getOctokit(token);
 
         const repo = await octokit.repos.get({
@@ -13,7 +18,7 @@ async function run(): Promise<void> {
 
         const envSecrets = await octokit.actions.listEnvironmentSecrets({
             repository_id: repo.data.id,
-            environment_name: 'dev'
+            environment_name: environment
         });
 
         for(const secret of envSecrets.data.secrets) {
