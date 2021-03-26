@@ -30,4 +30,8 @@ async function run(): Promise<void> {
     }
 }
 
+export function test() {
+
+}
+
 run();
