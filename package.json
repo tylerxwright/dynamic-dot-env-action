@@ -2,13 +2,13 @@
   "name": "dynamic-dot-env-action",
   "version": "1.0.0",
   "description": "Build a .env file from Github secrets and from a file.",
-  "main": "lib/main.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "run": "node -r dotenv/config lib/main.js",
-    "package": "ncc build --license LICENSE",
-    "publish": "npm run build && npm run package",
-    "test": "jest"
+    "start": "tsc && ncc build --source-map --license licenses.txt && GITHUB_TOKEN=$(grep GITHUB_TOKEN ./.env | cut -d '=' -f2) act -s $GITHUB_TOKEN --env-file=./.env",
+    "package": "ncc build --source-map --license licenses.txt",
+    "local": "node --loader ts-node/esm ./src/app.ts",
+    "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default"
   },
   "repository": {
     "type": "git",
@@ -25,14 +25,15 @@
   },
   "homepage": "https://github.com/tylerxwright/dynamic-dot-env-action#readme",
   "dependencies": {
+    "@actions/artifact": "^0.5.1",
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/github": "^4.0.0",
-    "dotenv": "^8.2.0"
+    "@actions/io": "^1.1.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
-    "@types/node": "^14.14.35",
+    "@types/node": "^14.14.41",
     "@vercel/ncc": "^0.27.0",
     "jest": "^26.6.3",
     "jest-circus": "^26.6.3",

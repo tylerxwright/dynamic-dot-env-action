@@ -2,13 +2,26 @@ name: 'Dynamic Dot Env Action'
 description: 'Build a .env file from Github secrets and from a file.'
 author: 'Tyler Wright'
 inputs:
+  repo_owner:
+    required: true
+    description: 'Owner of the repository'
+  repo_name:
+    required: true
+    description: 'Name of the repository'
   environment: 
-    required: false
+    required: true
     description: 'This is the name of the environment you store your secrets'
     default: ''
   github_token:
-    required: false
+    required: true
     description: 'A Personal Access Token with permissions to your repository secrets'
+  env_filename:
+    required: false
+    description: 'Provide a name for the env file. Default is .env.'
+    default: '.env'
+  append_file:
+    required: false
+    description: 'File to use to append to the .env file'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node12'
+  main: 'dist/index.js'

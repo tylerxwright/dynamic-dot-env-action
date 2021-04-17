@@ -7,19 +7,18 @@ on:
       - 'releases/*'
 
 jobs:
-  build:
+  build-env-file:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          npm install
-      - run: |
-          npm run build && npm run package
+        with:
+          path: 'dynamic-dot-env-action'
 
-      - uses: actions/checkout@v2
-
-      - name: Testing action
-        uses: ./
+      - uses: ./
         with:
           environment: dev
-          github_token: ${{ secrets.ACTION_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_owner: 'tylerxwright'
+          repo_name: 'dynamic-dot-env-action'
+
+
