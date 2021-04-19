@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && ncc build --source-map --license licenses.txt && GITHUB_TOKEN=$(grep GITHUB_TOKEN ./.env | cut -d '=' -f2) act -s $GITHUB_TOKEN --env-file=./.env",
+    "start": "tsc && ncc build --source-map --license licenses.txt && act",
     "package": "ncc build --source-map --license licenses.txt",
     "local": "node --loader ts-node/esm ./src/app.ts",
     "test": "npx jest --runInBand --detectOpenHandles --colors --verbose --reporters=default"
@@ -29,7 +29,8 @@
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
     "@actions/github": "^4.0.0",
-    "@actions/io": "^1.1.0"
+    "@actions/io": "^1.1.0",
+    "tweetsodium": "^0.0.5"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",

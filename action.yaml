@@ -15,13 +15,20 @@ inputs:
   github_token:
     required: true
     description: 'A Personal Access Token with permissions to your repository secrets'
-  env_filename:
-    required: false
-    description: 'Provide a name for the env file. Default is .env.'
-    default: '.env'
   append_file:
     required: false
     description: 'File to use to append to the .env file'
+  pre_wrapper:
+    required: false
+    description: 'Only used for internal testing. Setting this will change the pre wrapper used'
+    default: '${{'
+  post_wrapper:
+    required: false
+    description: 'Only used for internal testing. Setting this will change the post wrapper used'
+    default: '}}'
+outputs:
+  dynamic_dot_env_data:
+    description: 'The raw env file data'
 runs:
   using: 'node12'
   main: 'dist/index.js'

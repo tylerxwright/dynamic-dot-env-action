@@ -9,16 +9,31 @@ on:
 jobs:
   build-env-file:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - uses: actions/checkout@v2
         with:
-          path: 'dynamic-dot-env-action'
+          path: './dynamic-dot-env-action'
 
-      - uses: ./
+      - name: Generate Env Data
+        id: dot_env_data
+        uses: ./
         with:
+          github_token: ${{ secrets.TEST_TOKEN }}
           environment: dev
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           repo_owner: 'tylerxwright'
           repo_name: 'dynamic-dot-env-action'
+          pre_wrapper: '$[['
+          post_wrapper: ']]'
+      
+      - name: Output Env File
+        env:
+          ENV_FILE_DATA: ${{ steps.dot_env_data.outputs.dynamic_dot_env_data }}
+        shell: bash
+        run: 'echo "$ENV_FILE_DATA" > .env'
+        
+      - name: View Env File
+        shell: bash
+        run: 'cat ./.env'
 
 
