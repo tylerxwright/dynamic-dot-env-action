@@ -31,17 +31,18 @@ function createDotEnv() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // convert this to an object
-            const environment = core.getInput('environment');
-            const token = core.getInput('github_token');
             const repoOwner = core.getInput('repo_owner');
             const repoName = core.getInput('repo_name');
+            const environment = core.getInput('environment');
+            const githubToken = core.getInput('github_token');
+            const secretPrefix = core.getInput('secret_prefix');
             const appendFile = core.getInput('append_file');
             const preWrapper = core.getInput('pre_wrapper');
             const postWrapper = core.getInput('post_wrapper');
-            if (token === '') {
-                throw new Error('GITHUB_TOKEN is required');
+            if (githubToken === '') {
+                throw new Error('github_token is required');
             }
-            const octokit = (0,github.getOctokit)(token);
+            const octokit = (0,github.getOctokit)(githubToken);
             const repo = yield octokit.repos.get({
                 owner: repoOwner,
                 repo: repoName
@@ -52,7 +53,9 @@ function createDotEnv() {
             });
             let envFile = '';
             envSecrets.data.secrets.forEach((secret) => {
-                envFile += secret.name + '=' + preWrapper + ' secrets.' + secret.name + ' ' + postWrapper + '\n';
+                if (secret.name.startsWith(secretPrefix)) {
+                    envFile += secret.name + '=' + preWrapper + ' secrets.' + secret.name + ' ' + postWrapper + '\n';
+                }
             });
             if (appendFile) {
                 envFile += appendFile;

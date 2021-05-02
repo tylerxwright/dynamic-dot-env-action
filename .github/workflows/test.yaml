@@ -25,6 +25,7 @@ jobs:
           repo_name: 'dynamic-dot-env-action'
           pre_wrapper: '$[['
           post_wrapper: ']]'
+          secret_prefix: 'ENV_'
       
       - name: Output Env File
         env:
